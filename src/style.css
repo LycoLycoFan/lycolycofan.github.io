@@ -1,0 +1,541 @@
+@charset "utf-8";
+/***
+    The new CSS reset - version 1.8.5 (last updated 14.6.2023)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+    - The "html" attribute is exclud, because otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+    all: unset;
+    display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a, button {
+    cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol, ul, menu {
+    list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+    max-inline-size: 100%;
+    max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+    border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input, textarea {
+    -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+    white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+    -webkit-appearance: revert;
+    appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+:where(pre) {
+    all: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+    color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+    content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+    display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element */
+:where([contenteditable]:not([contenteditable="false"])) {
+    -moz-user-modify: read-write;
+    -webkit-user-modify: read-write;
+    overflow-wrap: break-word;
+    -webkit-line-break: after-white-space;
+    -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable="true"]) {
+    -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+    all: revert;
+}
+
+@import url('http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic&subset=latin,latin-ext');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+body {
+    display: block;
+    width: 100%;
+    background-color: #F3979A !important;
+    padding: 10px !important;
+    position: relative;
+    font-family: 'Noto Sans JP', 'Noto Sans TC', '微軟正黑體', sans-serif;
+}
+
+.fixedBack {
+    /*overflow: hidden !important;*/
+}
+
+.wrapper {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    background-color: white;
+    border: 2px solid #F0555A;
+    padding: 20px 30px 50px 30px;
+    overflow-x: hidden;
+}
+
+.header-button {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.header-button h1 {
+    font-size: 40px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
+
+.header-button h2 {
+    font-size: 25px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 20px;
+    margin-top: 10px;
+}
+
+.mainColor {
+    color: #F0555A;
+}
+
+.greenColor {
+    color: #00B4AA;
+}
+
+.brownColor {
+    color: #8C4623;
+}
+
+.grayColor {
+    color: gray;
+}
+
+.logo {
+    max-width: 650px;
+    width: 90%;
+}
+
+.label {
+    font-size: 20px;
+    display: inline-block;
+    padding: 5px 20px;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background-color: #00B4AA;
+}
+
+.label-topSpace {
+    margin-top: 40px;
+}
+
+.subLabel {
+    font-size: 12px;
+    color: #F3979A;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.img-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px 10px;
+    margin-top: 20px;
+    padding: 30px;
+    border: 4px dashed #F3979A;
+    border-radius: 20px;
+}
+
+.img-list-button, .img-list-button-selected {
+    border: 4px solid #A88030;
+    background-color: #A88030;
+    cursor: pointer;
+    transition: .3s ease;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.img-list-button-active {
+    border: 4px solid #00B4AA;
+    background-color: #00B4AA;
+}
+
+.img-list-button-selected {
+    border: 4px solid #F0555A;
+    background-color: #F0555A;
+}
+
+.img-list-button-gray {
+    border: 4px solid gray;
+    background-color: gray;
+}
+
+.img-list-button-gray img {
+    filter: grayscale(90%);
+}
+
+.text {
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+.img-list img {
+    width: 100%;
+}
+
+.remarkText {
+    width: 100%;
+    text-align: center;
+    color: #F3979A;
+    padding: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    border: 4px dashed #F3979A;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.remarkText a {
+    color: #00B4AA;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.clearButton {
+    color: #F0555A;
+    font-weight: bold;
+    padding: 5px 15px;
+    border: 2px solid #F0555A;
+    cursor: pointer;
+    transition: .3 ease;
+}
+
+.clearButton:hover {
+    opacity: .8;
+}
+
+.alighBetween {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.alighCenter {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.createBookWrapper {
+    margin-top: 40px;
+    width: 100%;
+    padding: 50px 10px;
+    text-align: center;
+}
+
+.createBookButton {
+    width: 100%;
+    max-width: 400px;
+    background-color: #313D5D;
+    color: white;
+    text-align: center;
+    padding: 20px 40px;
+    border-radius: 30px;
+    transition: .3s ease;
+    letter-spacing: 1px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.userNameBlock {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.userNameBlock input[type="text"] {
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 2px solid #00B4AA;
+    color: #00B4AA;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.backHomeButton {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #E65A60;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 30px;
+}
+
+.backHomeButtonWrapper {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.addWishBtn {
+    margin-left: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #00B4AA;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.selections-popUp {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 100;
+}
+
+.selections {
+    background-color: white;
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    overflow: scroll;
+    padding-bottom: 50px;
+}
+
+.selections-closedBtn {
+    width: 100%;
+    padding: 40px 0 0 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.selections-closedBtn button {
+    padding: 10px 25px;
+    background-color: #f0555a;
+    color: white;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.selections-closedBtn button:hover {
+    opacity: 0.8;
+}
+
+::placeholder {
+    color: darkgray;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: darkgray;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: darkgray;
+}
+
+.createBookButton:hover {
+    background-color: #E65A60;
+}
+
+/* modal */
+.modal-remind-text {
+    color: #E65A60;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/*iview*/
+.ivu-modal-header-inner {
+    color: black !important;
+    font-size: 20px !important;
+    letter-spacing: 1px;
+}
+
+.ivu-btn-primary {
+    background-color: #00B4AA !important;
+    border-color: #00B4AA !important;
+}
+
+.ivu-modal-content {
+    border-radius: 10px !important;
+}
+
+/* Tab */
+.ivu-tabs-nav .ivu-tabs-tab-active {
+    color: #00B4AA !important;
+    font-weight: bold;
+}
+
+.ivu-tabs-nav:hover, .ivu-tabs-tab:hover {
+    color: #00B4AA !important;
+    font-weight: bold;
+}
+
+.ivu-tabs-ink-bar {
+    background-color: #00B4AA !important;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1400px){
+    .img-list {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 10px 10px;
+        margin-top: 20px;
+        padding: 30px;
+        border: 4px dashed #F3979A;
+        border-radius: 20px;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+    .img-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        padding: 20px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 979px) {
+    .img-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .img-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-device-width: 480px) {
+    .label, .userNameBlock input[type="text"] {
+        font-size: 16px;
+    }
+
+    .wrapper {
+        padding: 20px;
+    }
+
+    .img-list {
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 20px;
+    }
+
+    .header-button h1 {
+        font-size: 25px;
+    }
+
+    .header-button h2 {
+        font-size: 18px;
+        letter-spacing: 12px;
+    }
+}
