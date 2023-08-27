@@ -4,9 +4,25 @@
     <title>Page Not Found</title>
 </head>
 <body>
+<div id="app"></div>
 <script>
-    const path = window.location.pathname.replace(/\/$/, ''); // 移除可能的尾斜線
-    window.location.href = '/lycolycofan.github.io' + path; // 修改為你的GitHub專案名稱
+    const url = new URL(window.location.href);
+    const base = '/lycolycofan.github.io/'; // 修改為你的GitHub專案名稱
+
+    if (url.pathname.startsWith(base)) {
+        const path = url.pathname.substring(base.length);
+        window.history.replaceState({}, '', path);
+    }
+
+    const script = document.createElement('script');
+    script.src = `${base}js/${getAppJsFileName()}`;
+    document.getElementById('app').appendChild(script);
+
+    function getAppJsFileName() {
+        const assetsManifest = __webpack_require__('./dist/assets-manifest.json');
+        return assetsManifest['index.js'];
+    }
 </script>
 </body>
 </html>
+
