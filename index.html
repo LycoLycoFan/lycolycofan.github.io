@@ -5,7 +5,16 @@
     <link rel="icon" type="image/png" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>リコリス・リコイル展 色紙整理</title>
-    <script type="module" crossorigin src="/assets/index-0a0137d6.js"></script>
+      <script>
+          (function(){
+              let redirect = sessionStorage.redirect;
+              delete sessionStorage.redirect;
+              if (redirect && redirect !== location.href) {
+                  history.replaceState(null, null, redirect);
+              }
+          })();
+      </script>
+    <script type="module" crossorigin src="/assets/index-9f96444f.js"></script>
     <link rel="stylesheet" href="/assets/index-3e1b139c.css">
   </head>
   <body>
